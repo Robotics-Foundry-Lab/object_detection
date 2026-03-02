@@ -1,5 +1,5 @@
-sudo apt update
-sudo apt-get install -y curl jq tar nvidia-l4t-dla-compiler
+# sudo apt update
+# sudo apt-get install -y curl jq tar nvidia-l4t-dla-compiler
 
 NGC_ORG="nvidia"
 NGC_TEAM="isaac"
@@ -33,6 +33,6 @@ versions/$LATEST_VERSION_ID/files/$NGC_FILENAME" && \
     rm ${NGC_FILENAME}
 fi
 
-mkdir /workspaces/object_detection/isaac_ros_assets/models/yolov8
-cd /workspaces/object_detection/isaac_ros_assets/models/yolov8
+mkdir -p ${ISAAC_ROS_WS}/isaac_ros_assets/models/yolov8
+cd ${ISAAC_ROS_WS}/isaac_ros_assets/models/yolov8
 python -c "from ultralytics import YOLO; model = YOLO('yolov8s.pt'); model.export(format='onnx')"

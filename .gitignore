@@ -2,6 +2,9 @@ build/*
 install/*
 log/*
 site/*
+isaac_ros_assets/*
+
+
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

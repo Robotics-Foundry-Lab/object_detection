@@ -17,6 +17,8 @@ services:
       - seccomp:unconfined
       - apparmor:unconfined
     environment:
+      YOLO_MODEL: yolov8s # choose model 
+      RUN_MODE: standalone # or: composite
       NVIDIA_VISIBLE_DEVICES: all
       NVIDIA_DRIVER_CAPABILITIES: all
       XDG_RUNTIME_DIR: ${XDG_RUNTIME_DIR}
@@ -28,4 +30,4 @@ services:
       - /tmp/.X11-unix:/tmp/.X11-unix
       - ../..:/workspaces:cached
 
-    command: ["bash", "/workspaces/object_detection/entrypoint_yolov8.sh"]
+    command: ["bash", "/workspaces/object_detection/entrypoint.sh"]
