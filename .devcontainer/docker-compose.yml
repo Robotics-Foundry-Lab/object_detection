@@ -17,9 +17,9 @@ services:
       - seccomp:unconfined
       - apparmor:unconfined
     environment:
-      YOLO_MODEL: yolov8s # choose model 
+      YOLO_MODEL: yolov8n # choose model 
       RUN_MODE: composite # standalone # or: composite
-      VIS_MODE: sparse # sparse (person, dog, potted plant), full (all 68 classes)
+      VIS_MODE: sparse # sparse (person, dog, potted plant), full (all 68 classes), person (only person, tracked with a unique ID)
       NVIDIA_VISIBLE_DEVICES: all
       NVIDIA_DRIVER_CAPABILITIES: all
       XDG_RUNTIME_DIR: ${XDG_RUNTIME_DIR}

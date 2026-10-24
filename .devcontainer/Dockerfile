@@ -39,6 +39,7 @@ RUN apt-get update --allow-releaseinfo-change \
     && rm -rf /var/lib/apt/lists/*
 
 RUN pip3 install ultralytics onnx "numpy<2"
+RUN pip3 install deep-sort-realtime
 
 RUN echo "source /opt/ros/humble/setup.bash" >> /root/.bashrc
 ARG WORKSPACE

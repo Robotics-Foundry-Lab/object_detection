@@ -13,6 +13,8 @@ This repository provides a ROS 2–based object‑detection container using Isaa
 
 The container is controlled entirely through environment variables in docker-compose.yml.
 
+For constrained GPUs, use the smaller `yolov8n` model. `yolov8s` can trigger CUDA OOMs on lower-VRAM Jetson or desktop GPUs even though it is the default in some older examples.
+
 ## 🚀 Quick Start
 
 Build and run the container
@@ -35,9 +37,11 @@ YOLO_MODEL
 
 Select which YOLOv8 model to run:
 
-    yolov8s (default, auto‑downloadable)
+    yolov8n (default, auto‑downloadable, lower memory usage)
 
-    yolov8n, yolov8m, yolov8l, yolov8x (must be manually provided) #TODO implement auto pulling and conversion for other models
+    yolov8s (larger model; use only if your GPU has spare VRAM)
+
+    yolov8m, yolov8l, yolov8x (must be manually provided) #TODO implement auto pulling and conversion for other models
 
 RUN_MODE
 
@@ -63,7 +67,7 @@ yaml
 services:
   object_detection:
     environment:
-      YOLO_MODEL: yolov8s
+      YOLO_MODEL: yolov8n
       RUN_MODE: standalone
       VIS_MODE: sparse
 
@@ -74,12 +78,12 @@ The container expects model assets in:
 ```
 ${ISAAC_ROS_WS}/isaac_ros_assets/models/yolov8/
 ```
-Default model (yolov8s)
+Default model (yolov8n)
 
 If missing, the container will automatically:
 
 - download Isaac ROS assets
-- export the YOLOv8s ONNX model
+- export the YOLOv8n ONNX model
 
 Non‑default models
 

@@ -24,7 +24,8 @@ setup(
     },
     entry_points={
         'console_scripts': [
-            'yolov8_sparse_visualizer = object_detection.yolov8_sparse_visualizer:main'
+            'yolov8_sparse_visualizer = object_detection.yolov8_sparse_visualizer:main',
+            'person_tracking = object_detection.person_tracking:main'
         ],
     },
 )

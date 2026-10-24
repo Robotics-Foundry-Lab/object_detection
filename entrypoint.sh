@@ -84,8 +84,10 @@ if [ "$RUN_MODE" = "composite" ]; then
 
     if [ "$VIS_MODE" = "sparse" ]; then
         ros2 run object_detection yolov8_sparse_visualizer &
-    else
+    elif [ "$VIS_MODE" = "full" ]; then
         ros2 run isaac_ros_yolov8 isaac_ros_yolov8_visualizer.py &
+    #else
+        # ros2 run object_detection person_tracking &
     fi
 
     ros2 run image_transport republish raw compressed \
