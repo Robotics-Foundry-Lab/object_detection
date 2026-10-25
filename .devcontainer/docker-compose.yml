@@ -16,10 +16,13 @@ services:
     security_opt:
       - seccomp:unconfined
       - apparmor:unconfined
+    init: true # forwards docker stop to ros2 launch and reaps zombie processes
+    restart: always
     environment:
-      YOLO_MODEL: yolov8n # choose model 
-      RUN_MODE: composite # standalone # or: composite
-      VIS_MODE: sparse # sparse (person, dog, potted plant), full (all 68 classes), person (only person, tracked with a unique ID)
+      # Override per run, e.g.: RUN_MODE=bag VIS_MODE=full docker compose up
+      YOLO_MODEL: ${YOLO_MODEL:-yolov8s} # yolov8n / yolov8s / yolov8m / yolov8l / yolov8x (auto-downloaded) or a custom model
+      RUN_MODE: ${RUN_MODE:-standalone} # standalone (own camera) / composite (camera from realsense container) / bag (quickstart rosbag)
+      VIS_MODE: ${VIS_MODE:-sparse} # sparse (person, dog, potted plant) / full (all classes) / none
       NVIDIA_VISIBLE_DEVICES: all
       NVIDIA_DRIVER_CAPABILITIES: all
       XDG_RUNTIME_DIR: ${XDG_RUNTIME_DIR}

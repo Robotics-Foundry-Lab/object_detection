@@ -8,6 +8,7 @@ COPY install_realsense.sh /usr/local/bin/install_realsense.sh
 RUN bash /usr/local/bin/install_realsense.sh
 
 # Install yolo assets setup script
+# (the entrypoint runs the mounted copy in /workspaces/object_detection instead, so edits apply without a rebuild)
 COPY setup_yolo_v8_assets.sh /usr/local/bin/setup_yolo_v8_assets.sh
 RUN chmod +x /usr/local/bin/setup_yolo_v8_assets.sh
 
@@ -39,7 +40,6 @@ RUN apt-get update --allow-releaseinfo-change \
     && rm -rf /var/lib/apt/lists/*
 
 RUN pip3 install ultralytics onnx "numpy<2"
-RUN pip3 install deep-sort-realtime
 
 RUN echo "source /opt/ros/humble/setup.bash" >> /root/.bashrc
 ARG WORKSPACE
